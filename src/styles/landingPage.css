@@ -1,0 +1,151 @@
+.landing-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0c2d4a;
+  padding: 1rem;
+  color: white;
+}
+
+.logo {
+  font-size: 1.5rem;
+  background-color: white;
+  color: #0c2d4a;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.hero {
+  background-color: #0c2d4a;
+  color: white;
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.hero-text h1 {
+  font-size: 2rem;
+  max-width: 400px;
+}
+
+.btn-start {
+  background-color: #e3dfc7;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+}
+
+.feature-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2rem;
+}
+
+.left {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #0c2d4a;
+}
+
+.right img {
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.benefits {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem;
+}
+
+.feature-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 200px;
+}
+
+.statement-box {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.extrato-benefits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  padding: 4rem 2rem;
+  margin-right: 150px;
+}
+
+.extrato-left img {
+  width: 100%;
+  max-width: 650px;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.benefits-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 320px;
+}
+
+.feature-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+}
+
+.feature-box i {
+  font-size: 1.4rem;
+}
+
+.start-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-start {
+  background-color: #e3dfc7;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  color: #092F4F;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-start:hover {
+  background-color: #c7d1a3;
+}

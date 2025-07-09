@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",  // Usar ES2023 para compatibilidade com recursos mais novos
+    "module": "ESNext",  // Usar módulos ES (import/export)
+    "moduleResolution": "node",  // Resolver módulos como Node.js
+    "esModuleInterop": true,  // Permitir compatibilidade com módulos CommonJS
+    "skipLibCheck": true,  // Ignorar verificação de tipo de bibliotecas
+    "jsx": "react-jsx",  // Configuração JSX para React
+    "noEmit": false,  // Permitir a geração dos arquivos .js
+    "outDir": "./dist",  // Diretório de saída para arquivos compilados
+    "rootDir": "./src",  // Diretório raiz para os arquivos TypeScript
+    "strict": true,  // Habilitar verificações estritas
+    "noUnusedLocals": true,  // Avisar sobre variáveis não usadas
+    "noUnusedParameters": true,  // Avisar sobre parâmetros não usados
+    "resolveJsonModule": true,  // Permitir importação de arquivos JSON
+    "moduleDetection": "force",  // Forçar o uso de módulos ES
+    "verbatimModuleSyntax": true,  // Usar a sintaxe exata de importação/exportação
+    "noFallthroughCasesInSwitch": true  // Impedir "fallthrough" em declarações switch
+  },
+  "include": ["src/**/*"],  // Incluir todos os arquivos .ts dentro de src
+  "exclude": ["node_modules"]  // Excluir a pasta node_modules
+}

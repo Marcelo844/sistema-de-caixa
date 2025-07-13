@@ -3,32 +3,39 @@ import React, { useState } from 'react';
 import cashifyLogo from '../assets/Cashify_logo.png';
 import '../styles/login.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  // Função de login
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', {
-        email,
-        password,
-      });
+  // Simulação de login local, sem backend
+  if (email === 'admin@cashify.com' && password === '123456') {
+    // Simula um token
+    localStorage.setItem('token', 'fake-token');
+    navigate('/entrada-saida');
+    return;
+  }
 
-      // Salvar o token JWT no localStorage ou em qualquer lugar seguro
-      localStorage.setItem('token', response.data.token);
+  // Se quiser usar o backend real depois, deixa abaixo
+  try {
+    const response = await axios.post('http://localhost:3000/api/auth/login', {
+      email,
+      password,
+    });
 
-      // Redirecionar ou mudar a tela após o login bem-sucedido
-      console.log('Login bem-sucedido:', response.data.token);
-    } catch (err: any) {
-      setError('Email ou senha inválidos');
-      console.error('Erro de login:', err);
-    }
-  };
+    localStorage.setItem('token', response.data.token);
+    navigate('/entrada-saida');
+  } catch (err: any) {
+    setError('Email ou senha inválidos');
+    console.error('Erro de login:', err);
+  }
+};
 
   return (
     <div className="login-wrapper">
@@ -38,7 +45,6 @@ const Login: React.FC = () => {
 
           <h2>Faça login no Cashify</h2>
 
-          {/* Exibir erros de login */}
           {error && <p className="error-message">{error}</p>}
 
           <form className="login-form" onSubmit={handleLogin}>

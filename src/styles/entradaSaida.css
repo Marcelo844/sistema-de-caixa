@@ -1,0 +1,239 @@
+/* src/styles/entradaSaida.css */
+
+.container-movimentacao {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  background-color: #0d2b45;
+  color: #ffffff;
+  min-height: 100vh;
+  height: auto;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.form-movimentacao {
+  background-color: #163b5b;
+  padding: 30px;
+  border-radius: 12px;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-movimentacao h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tipo label {
+  margin-right: 20px;
+}
+
+.tipo input {
+  margin-right: 5px;
+}
+
+.grid-2 {
+  display: flex;
+  gap: 20px;
+}
+
+.grid-2 input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+select, textarea, input[type="number"], input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px; 
+  padding: 10px;
+  resize: vertical; /* Permite o usuário aumentar se quiser */
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+.grid-categoria {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.grid-categoria .categoria {
+  flex: 1; /* permite que o select cresça */
+}
+
+.btn-editar {
+  background-color: #e3dfc7;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #092F4F;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 0; /* Removido para manter alinhado */
+  height: 40px; /* Mantém altura igual ao select */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botoes {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-salvar {
+  background-color: #f4e9c8;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #0d2b45;
+}
+
+button[type="button"] {
+  background-color: transparent;
+  border: 2px solid #f4e9c8;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #f4e9c8;
+}
+
+.card-saldo {
+  width: 40%;
+  background-color: #ffffff;
+  color: #0d2b45;
+  padding: 30px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-saldo h4 {
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+.valor-total {
+  font-size: 28px;
+  font-weight: bold;
+  color: #008000;
+}
+
+.variacao {
+  font-size: 14px;
+  color: #555;
+}
+
+.saldo-meio p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Responsividade para tablets e celulares */
+@media (max-width: 1024px) {
+  .container-movimentacao {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .form-movimentacao, .card-saldo {
+    width: 100%;
+  }
+
+  .grid-2 {
+    flex-direction: column;
+  }
+
+  .botoes {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-salvar,
+  button[type="button"] {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-movimentacao h3 {
+    font-size: 20px;
+  }
+
+  .card-saldo h4 {
+    font-size: 18px;
+  }
+
+  .valor-total {
+    font-size: 24px;
+  }
+
+  .form-movimentacao,
+  .card-saldo {
+    padding: 20px;
+  }
+
+  .input-group input,
+  select,
+  textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .btn-editar {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+.btn-editar {
+  background-color: #e3dfc7;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  color: #092F4F;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 1rem;
+}
+
+.btn-editar:hover {
+  background-color: #c7d1a3;
+}
+
+.btn-historico-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+select:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+  border: 1px solid #ced4da;
+  opacity: 1; /* mantém o contraste */
+}

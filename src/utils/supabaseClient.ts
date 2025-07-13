@@ -1,14 +1,13 @@
 // /src/utils/supabaseClient.ts
-
 import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
-
-// Carregar variáveis de ambiente do arquivo .env
-dotenv.config();
 
 // Acessar as variáveis de ambiente
-const supabaseUrl = process.env.SUPABASE_URL as string;
-const supabaseKey = process.env.SUPABASE_KEY as string;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('As variáveis de ambiente SUPABASE_URL e SUPABASE_KEY não estão definidas.');
+}
 
 // Criar o cliente Supabase
 const supabase = createClient(supabaseUrl, supabaseKey);

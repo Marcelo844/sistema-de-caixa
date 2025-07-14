@@ -1,0 +1,81 @@
+.extrato-container {
+  padding: 20px;
+  background-color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.extrato-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+}
+
+.extrato-header .voltar {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.extrato-header h2 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.icone-canto {
+  background-color: #0d2b45;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.filtros {
+  margin: 10px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.tabela-wrapper {
+  background-color: #fff;
+  border-radius: 10px;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tabela-extrato {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-extrato thead {
+  background-color: #0d2b45;
+  color: white;
+}
+
+.tabela-extrato th,
+.tabela-extrato td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+
+.acoes {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icone {
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.icone.editar:hover {
+  color: #007bff;
+}
+
+.icone.excluir:hover {
+  color: #dc3545;
+}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // import do useNavigate
 import '../styles/entradaSaida.css';
 import { salvarMovimentacao, buscarMovimentacoes } from '../utils/movimentacoesService';
 
@@ -11,6 +12,8 @@ const EntradaSaida: React.FC = () => {
   const [descricao, setDescricao] = useState('');
   const [categoriaEditavel, setCategoriaEditavel] = useState(true);
   const [saldos, setSaldos] = useState({ total: 0, dinheiro: 0, pix: 0, cartao: 0 });
+
+  const navigate = useNavigate(); // <-- aqui
 
   useEffect(() => {
     carregarSaldos();
@@ -202,7 +205,12 @@ const EntradaSaida: React.FC = () => {
         <p className="variacao">+0,00% Comparado ao mês anterior</p>
 
         <div className="btn-historico-wrapper">
-          <button className="btn-editar">Ver Histórico</button>
+          <button
+            className="btn-editar"
+            onClick={() => navigate('/movimentacoes')}
+          >
+            Ver Histórico
+          </button>
         </div>
 
         <h5>Saldos por meio:</h5>

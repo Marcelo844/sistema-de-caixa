@@ -1,7 +1,7 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';  // Importando as rotas de autenticação
 
 dotenv.config();  // Carregar variáveis de ambiente do arquivo .env

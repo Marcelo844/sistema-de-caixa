@@ -79,3 +79,49 @@
 .icone.excluir:hover {
   color: #dc3545;
 }
+
+/* Inputs dentro da tabela */
+.tabela-extrato input[type="text"],
+.tabela-extrato input[type="number"],
+.tabela-extrato input[type="date"],
+.tabela-extrato select {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.tabela-extrato input:focus,
+.tabela-extrato select:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+.tabela-extrato td {
+  vertical-align: middle;
+}
+
+/* Ícones de ação */
+.acoes .icone {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.acoes .icone.salvar {
+  color: #28a745;
+}
+
+.acoes .icone.cancelar {
+  color: #dc3545;
+}
+
+/* Estilizando a linha ativa em edição */
+.tabela-extrato tr td {
+  transition: background-color 0.3s ease;
+}
+
+.tabela-extrato tr.editando td {
+  background-color: #f0f8ff;
+}

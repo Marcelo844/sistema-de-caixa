@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';  // import do useNavigate
+import { useNavigate } from 'react-router-dom';
 import '../styles/entradaSaida.css';
 import { salvarMovimentacao, buscarMovimentacoes } from '../utils/movimentacoesService';
+import CategoriasModal from '../components/CategoriasModal';
+import { buscarCategorias } from '../utils/categoriasService';
 
 const EntradaSaida: React.FC = () => {
   const [tipo, setTipo] = useState<'entrada' | 'saida'>('entrada');
   const [valor, setValor] = useState('');
   const [data, setData] = useState('');
   const [formaPagamento, setFormaPagamento] = useState('');
-  const [categoria, setCategoria] = useState('');
+  const [categoria, setCategoria] = useState(''); // Agora armazena id da categoria
   const [descricao, setDescricao] = useState('');
   const [categoriaEditavel, setCategoriaEditavel] = useState(true);
   const [saldos, setSaldos] = useState({ total: 0, dinheiro: 0, pix: 0, cartao: 0 });
 
-  const navigate = useNavigate(); // <-- aqui
+  const [modalAberto, setModalAberto] = useState(false);
+  const [categorias, setCategorias] = useState<{ id: string; nome: string }[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     carregarSaldos();
   }, []);
+
+  useEffect(() => {
+    carregarCategorias(tipo);
+    setCategoria(''); // Limpa categoria selecionada quando muda tipo
+  }, [tipo]);
 
   const carregarSaldos = async () => {
     try {
@@ -29,7 +39,7 @@ const EntradaSaida: React.FC = () => {
       let cartao = 0;
 
       movimentacoes.forEach((m) => {
-        const valor = parseFloat(m.valor);
+        const valor = typeof m.valor === 'string' ? parseFloat(m.valor) : m.valor;
         const sinal = m.tipo === 'entrada' ? 1 : -1;
         const valorFinal = valor * sinal;
         total += valorFinal;
@@ -42,6 +52,15 @@ const EntradaSaida: React.FC = () => {
       setSaldos({ total, dinheiro, pix, cartao });
     } catch (error) {
       console.error('Erro ao carregar saldos:', error);
+    }
+  };
+
+  const carregarCategorias = async (tipoCategoria: 'entrada' | 'saida') => {
+    try {
+      const lista = await buscarCategorias(tipoCategoria);
+      setCategorias(lista);
+    } catch (error) {
+      console.error('Erro ao carregar categorias:', error);
     }
   };
 
@@ -67,13 +86,18 @@ const EntradaSaida: React.FC = () => {
   const handleSalvar = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!categoria) {
+      alert('Selecione uma categoria válida');
+      return;
+    }
+
     try {
       await salvarMovimentacao({
         tipo,
         valor: parseValorParaNumero(valor),
         data,
         forma_pagamento: formaPagamento,
-        categoria,
+        categoria, // agora está o ID da categoria
         descricao,
       });
 
@@ -93,6 +117,19 @@ const EntradaSaida: React.FC = () => {
     setCategoria('');
     setDescricao('');
     setCategoriaEditavel(true);
+  };
+
+  const abrirModal = () => {
+    setCategoriaEditavel(true);
+    setModalAberto(true);
+  };
+
+  // Aqui recebe o tipo que o modal passou para garantir atualização correta
+  const fecharModal = async (tipoAtualizado: 'entrada' | 'saida') => {
+    setModalAberto(false);
+    await carregarCategorias(tipoAtualizado);
+    setCategoria(''); // Limpa categoria para forçar o usuário selecionar a nova categoria
+    setTipo(tipoAtualizado); // Atualiza o tipo para manter sincronizado
   };
 
   return (
@@ -162,7 +199,7 @@ const EntradaSaida: React.FC = () => {
           <option value="cartao">Cartão</option>
         </select>
 
-        <div className="grid-categoria">
+        <div className="grid-categoria" style={{ position: 'relative' }}>
           <div className="categoria">
             <label>Categoria:</label>
             <select
@@ -172,15 +209,17 @@ const EntradaSaida: React.FC = () => {
               required
             >
               <option value="">Selecione</option>
-              <option value="alimentacao">Alimentação</option>
-              <option value="salario">Salário</option>
-              <option value="lazer">Lazer</option>
+              {categorias.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.nome}
+                </option>
+              ))}
             </select>
           </div>
           <button
             type="button"
             className="btn-editar"
-            onClick={() => setCategoriaEditavel(true)}
+            onClick={abrirModal}
           >
             Editar
           </button>
@@ -198,6 +237,13 @@ const EntradaSaida: React.FC = () => {
           <button type="button" onClick={handleCancelar}>Cancelar</button>
         </div>
       </form>
+
+      {/* MODAL FORA DO FORMULÁRIO */}
+      {modalAberto && (
+        <div className="modal-inline-posicao">
+          <CategoriasModal onClose={fecharModal} />
+        </div>
+      )}
 
       <div className="card-saldo">
         <h4>Saldo Total:</h4>

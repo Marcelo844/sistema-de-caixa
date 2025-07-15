@@ -1,0 +1,82 @@
+.modal-fundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-corpo {
+  background-color: #163b5b;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 600px;
+  max-width: 90%;
+}
+
+.categorias-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.categorias-grid h3 {
+  margin-bottom: 10px;
+}
+
+.categorias-grid ul {
+  list-style: none;
+  padding: 0;
+}
+
+.categorias-grid li {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.categorias-grid button {
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.adicionar-categoria {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.adicionar-categoria input {
+  flex: 1;
+}
+
+.botoes-modal {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-fechar, .btn-salvar {
+  background-color: #2980b9;
+  border: none;
+  padding: 10px 15px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-fechar {
+  background-color: #7f8c8d;
+}

@@ -1,12 +1,17 @@
+// src/utils/supabaseClient.ts
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+// Se estiver rodando no browser (Vite), use import.meta.env;
+// caso contrário (Node.js), caia no fallback de process.env
+const inBrowser = typeof window !== 'undefined';
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('As variáveis de ambiente VITE_SUPABASE_URL e VITE_SUPABASE_KEY não estão definidas.');
-}
+const supabaseUrl = inBrowser
+  ? import.meta.env.VITE_SUPABASE_URL
+  : process.env.SUPABASE_URL!;
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabaseKey = inBrowser
+  ? import.meta.env.VITE_SUPABASE_KEY
+  : process.env.SUPABASE_KEY!;
 
+export const supabase = createClient(supabaseUrl, supabaseKey);
 export default supabase;

@@ -1,41 +1,31 @@
-// src/pages/Login.tsx
 import React, { useState } from 'react';
-import cashifyLogo from '../assets/Cashify_logo.png';
-import '../styles/login.css';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import cashifyLogo from '../assets/Cashify_logo.png';
+import '../styles/login.css';  // reutilizando estilos da tela de login
+import axios from 'axios';
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
-
-  // Simulação de login local, sem backend
-  if (email === 'admin@cashify.com' && password === '123456') {
-    // Simula um token
-    localStorage.setItem('token', 'fake-token');
-    navigate('/entrada-saida');
-    return;
-  }
-
-  // Se quiser usar o backend real depois, deixa abaixo
-  try {
-    const response = await axios.post('http://localhost:3000/api/auth/login', {
-      email,
-      password,
-    });
-
-    localStorage.setItem('token', response.data.token);
-    navigate('/entrada-saida');
-  } catch (err: any) {
-    setError('Email ou senha inválidos');
-    console.error('Erro de login:', err);
-  }
-};
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    if (password !== confirmPassword) {
+      setError('As senhas não conferem.');
+      return;
+    }
+    try {
+      // Ajuste a URL conforme seu endpoint de cadastro
+      await axios.post('/api/register', { email, password });
+      navigate('/login');
+    } catch (err) {
+      setError('Erro ao registrar usuário. Verifique os dados e tente novamente.');
+    }
+  };
 
   return (
     <div className="login-wrapper">
@@ -43,11 +33,11 @@ const handleLogin = async (e: React.FormEvent) => {
         <div className="login-content">
           <img src={cashifyLogo} alt="Cashify Logo" className="login-logo" />
 
-          <h2>Faça login no Cashify</h2>
+          <h2>Registre-se no Cashify</h2>
 
           {error && <p className="error-message">{error}</p>}
 
-          <form className="login-form" onSubmit={handleLogin}>
+          <form className="login-form" onSubmit={handleRegister}>
             <div className="input-group">
               <label htmlFor="email">Email:</label>
               <input
@@ -55,7 +45,7 @@ const handleLogin = async (e: React.FormEvent) => {
                 id="email"
                 placeholder="Digite seu email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -67,16 +57,28 @@ const handleLogin = async (e: React.FormEvent) => {
                 id="password"
                 placeholder="Digite sua senha"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 required
               />
             </div>
 
-            <button type="submit" className="btn-login">Entrar</button>
+            <div className="input-group">
+              <label htmlFor="confirmPassword">Confirmar Senha:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirme sua senha"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button type="submit" className="btn-login">Registrar</button>
           </form>
 
           <p className="register-text">
-            Não possui conta? <Link to="/register">Registre-se</Link>
+            Já possui conta? <Link to="/login">Entrar</Link>
           </p>
 
           <div className="social-icons">
@@ -89,7 +91,6 @@ const handleLogin = async (e: React.FormEvent) => {
           </div>
         </div>
       </div>
-
       <div className="login-right">
         <p>A inteligência por trás do seu caixa.</p>
       </div>
@@ -97,4 +98,4 @@ const handleLogin = async (e: React.FormEvent) => {
   );
 };
 
-export default Login;
+export default Register;

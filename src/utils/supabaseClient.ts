@@ -1,8 +1,6 @@
-// src/utils/supabaseClient.ts
 import { createClient } from '@supabase/supabase-js';
 
-// Se estiver rodando no browser (Vite), use import.meta.env;
-// caso contrário (Node.js), caia no fallback de process.env
+
 const inBrowser = typeof window !== 'undefined';
 
 const supabaseUrl = inBrowser

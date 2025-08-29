@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import cashifyLogo from '../assets/Cashify_logo.png';
 import '../styles/login.css';
 import { supabase } from '../utils/supabaseClient';
-import { FaEye, FaEyeSlash, FaInstagram, FaLinkedin, FaFacebook } from 'react-icons/fa';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -15,45 +14,59 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
     if (error) {
-      if (error.message.includes('not confirmed')) setError('Você precisa confirmar seu e‑mail antes de entrar.');
-      else setError('Email ou senha incorretos.');
-    } else {
-      navigate('/entrada-saida');
+      setError(error.message || 'Falha ao fazer login.');
+      return;
     }
+
+    const isVerified =
+      !!data.user?.email_confirmed_at ||
+      !!data.session?.user?.email_confirmed_at;
+
+    if (!isVerified) {
+      await supabase.auth.signOut();
+      setError('Seu e-mail ainda não foi verificado. Verifique sua caixa de entrada e tente novamente.');
+      return;
+    }
+
+    navigate('/entrada-saida');
   };
 
   return (
     <div className="login-wrapper">
       <div className="login-left">
-        <div className="login-content">
+        <div className="login-content form-card">
           <img src={cashifyLogo} alt="Cashify Logo" className="login-logo" />
           <h2>Entrar no Cashify</h2>
           {error && <p className="error-message">{error}</p>}
 
-          <form className="login-form" onSubmit={handleLogin}>
-            <div className="input-group">
-              <label htmlFor="email">Email:</label>
+          <form onSubmit={handleLogin}>
+            <div className="form-field">
+              <label className="form-label" htmlFor="email">Email:</label>
               <input
-                type="email"
                 id="email"
+                type="email"
+                className="input"
                 placeholder="Digite seu email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
 
-            <div className="input-group">
-              <label htmlFor="password">Senha:</label>
+            <div className="form-field">
+              <label className="form-label" htmlFor="password">Senha:</label>
               <div className="password-wrapper">
                 <input
-                  type={showPassword ? 'text' : 'password'}
                   id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  className="input"
                   placeholder="Digite sua senha"
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <button
@@ -61,27 +74,19 @@ const Login: React.FC = () => {
                   className="toggle-btn"
                   onClick={() => setShowPassword(s => !s)}
                   aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                  title={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
                 >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  <i className={showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'} aria-hidden="true"></i>
                 </button>
               </div>
             </div>
 
-            <button type="submit" className="btn-login">Entrar</button>
+            <button className="btn-primary" type="submit">Entrar</button>
           </form>
 
           <p className="register-text">
             Não possui conta? <Link to="/register">Registre-se</Link>
           </p>
-
-          <div className="social-icons">
-            <p>Siga-nos nas redes sociais</p>
-            <div className="icons">
-              <i className="bi bi-instagram" />
-              <i className="bi bi-linkedin" />
-              <i className="bi bi-facebook" />
-            </div>
-          </div>
         </div>
       </div>
       <div className="login-right">

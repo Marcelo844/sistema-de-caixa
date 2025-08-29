@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import cashifyLogo from '../assets/Cashify_logo.png';
 import '../styles/login.css';
 import { supabase } from '../utils/supabaseClient';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -22,12 +21,14 @@ const Register: React.FC = () => {
       setError('As senhas não conferem.');
       return;
     }
-    const redirectUrl = `${window.location.origin}/entrada-saida`;
+
+    const redirectUrl = `${import.meta.env.VITE_SITE_URL}/login`;
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: redirectUrl }
     });
+
     if (error) setError(error.message);
     else setStep('sent');
   };
@@ -39,9 +40,7 @@ const Register: React.FC = () => {
           <img src={cashifyLogo} alt="Cashify Logo" className="login-logo" />
           <h2 className="sent-title">Confirmação Enviada!</h2>
           <p className="info-message">
-            Tudo certo! 🚀<br />
-            Verifique seu e-mail <strong>{email}</strong> e clique no link de confirmação.<br />
-            Você será levado automaticamente para a página de Entrada e Saída.
+            Tudo certo! Verifique seu e-mail <strong>{email}</strong> e clique no link de confirmação.
           </p>
           <Link to="/login" className="btn-secondary">Voltar para Login</Link>
         </div>
@@ -50,35 +49,37 @@ const Register: React.FC = () => {
   }
 
   return (
-    <div className="login-wrapper">
+    <div className="login-wrapper register">
       <div className="login-left">
-        <div className="login-content">
+        <div className="login-content form-card">
           <img src={cashifyLogo} alt="Cashify Logo" className="login-logo" />
           <h2>Registre-se no Cashify</h2>
           {error && <p className="error-message">{error}</p>}
 
-          <form className="login-form" onSubmit={handleRegister}>
-            <div className="input-group">
-              <label htmlFor="email">Email:</label>
+          <form onSubmit={handleRegister}>
+            <div className="form-field">
+              <label className="form-label" htmlFor="email">Email:</label>
               <input
-                type="email"
                 id="email"
+                type="email"
+                className="input"
                 placeholder="Digite seu email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
 
-            <div className="input-group">
-              <label htmlFor="password">Senha:</label>
+            <div className="form-field">
+              <label className="form-label" htmlFor="password">Senha:</label>
               <div className="password-wrapper">
                 <input
-                  type={showPassword ? 'text' : 'password'}
                   id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  className="input"
                   placeholder="Digite sua senha"
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
                 <button
@@ -86,21 +87,23 @@ const Register: React.FC = () => {
                   className="toggle-btn"
                   onClick={() => setShowPassword(s => !s)}
                   aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                  title={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
                 >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  <i className={showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'} aria-hidden="true"></i>
                 </button>
               </div>
             </div>
 
-            <div className="input-group">
-              <label htmlFor="confirmPassword">Confirmar Senha:</label>
+            <div className="form-field">
+              <label className="form-label" htmlFor="confirmPassword">Confirmar Senha:</label>
               <div className="password-wrapper">
                 <input
-                  type={showConfirm ? 'text' : 'password'}
                   id="confirmPassword"
+                  type={showConfirm ? 'text' : 'password'}
+                  className="input"
                   placeholder="Confirme sua senha"
                   value={confirmPassword}
-                  onChange={e => setConfirmPassword(e.target.value)}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
                 <button
@@ -108,27 +111,19 @@ const Register: React.FC = () => {
                   className="toggle-btn"
                   onClick={() => setShowConfirm(s => !s)}
                   aria-label={showConfirm ? 'Ocultar confirmação' : 'Mostrar confirmação'}
+                  title={showConfirm ? 'Ocultar confirmação' : 'Mostrar confirmação'}
                 >
-                  {showConfirm ? <FaEyeSlash /> : <FaEye />}
+                  <i className={showConfirm ? 'bi bi-eye-slash' : 'bi bi-eye'} aria-hidden="true"></i>
                 </button>
               </div>
             </div>
 
-            <button type="submit" className="btn-login">Registrar</button>
+            <button type="submit" className="btn-primary">Registrar</button>
           </form>
 
           <p className="register-text">
             Já possui conta? <Link to="/login">Entrar</Link>
           </p>
-
-          <div className="social-icons">
-            <p>Siga-nos nas redes sociais</p>
-            <div className="icons">
-              <i className="bi bi-instagram" />
-              <i className="bi bi-linkedin" />
-              <i className="bi bi-facebook" />
-            </div>
-          </div>
         </div>
       </div>
       <div className="login-right">

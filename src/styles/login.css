@@ -1,6 +1,6 @@
 .login-container {
-  background-color: #092F4F; /* Fundo azul */
-  height: 100vh; /* Preenche toda a tela */
+  background-color: #092F4F;
+  height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,6 +9,24 @@
   overflow: hidden;
 }
 
+/* ===== Cadastro sem rolagem e logo menor ===== */
+.login-container.register {
+  height: 100vh;
+  overflow: hidden;          
+  padding-top: 24px;
+}
+.login-container.register .login-logo {
+  width: 120px;              
+  margin-bottom: 8px;
+}
+.login-container.register .page-title {
+  margin: 8px 0 18px;
+}
+.login-container.register .form-card {
+  padding: 24px;
+}
+
+/* ===== Logo ===== */
 .logo img {
   width: 180px;
   margin-bottom: 10px;
@@ -17,103 +35,13 @@
   object-fit: contain;
   background-color: transparent;
 }
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: #1c3a5a; /* Fundo do formulário mais claro */
-  padding: 3rem;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
-}
-
-.login-form h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.input-group label {
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-}
-
-.input-group input {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-}
-
-.btn-login {
-  background-color: #e3dfc7;
-  border: none;
-  padding: 0.75rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  color: #092F4F;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn-login:hover {
-  background-color: #c7d1a3;
-}
-
-.login-wrapper {
-  display: flex;
-  height: 100vh;
-}
-
-.login-left, .login-right {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #092F4F;
-  color: white;
-}
-
-.login-left {
-  flex: 1;
-  background-color: #092F4F;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.login-content {
-  width: 100%;
-  max-width: 400px;
-  padding: 1rem;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-content h2 {
-  margin: 0 0 1rem 0;
-  text-align: center;
-}
-
 .login-logo {
   width: 120px;
   height: auto;
   margin-bottom: 1rem;
 }
 
+/* ===== Formulário ===== */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -124,40 +52,42 @@
   width: 100%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
-
-.register-text {
-  margin-top: 1rem;
-  font-size: 0.9rem;
+.login-form h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
 }
 
-.register-text a {
-  color: #e3dfc7;
-  text-decoration: underline;
+/* ===== Layout geral ===== */
+.login-wrapper {
+  display: flex;
+  height: 100vh;
 }
-
-.social-icons {
-  margin-top: 1.5rem;
+.login-left, .login-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #092F4F;
+  color: white;
+}
+.login-left {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+.login-content {
+  width: 100%;
+  max-width: 400px;
+  padding: 1rem;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-content h2 {
+  margin: 0 0 1rem 0;
   text-align: center;
 }
-
-.icons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
-
-.icons i {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: white;
-  transition: color 0.3s;
-}
-
-.icons i:hover {
-  color: #e3dfc7;
-}
-
 .login-right {
   flex: 1;
   background-color: #092F4F;
@@ -167,58 +97,30 @@
   align-items: center;
   padding: 2rem;
 }
-
 .login-right p {
   font-size: 1.2rem;
   text-align: center;
   max-width: 300px;
 }
 
-.password-group {
-  position: relative;
+/* ===== Links de registro/login ===== */
+.register-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+.register-text a {
+  color: #e3dfc7;
+  text-decoration: underline;
 }
 
-.password-group input {
-  box-sizing: border-box;
-  padding-right: 3.5rem; /* espaço para o ícone */
-}
-
-.toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 0.5rem;
-  transform: translateY(-50%);
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(229, 223, 198, 0.2);
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255,255,255,0.3);
-  z-index: 10;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.toggle-password svg {
-  width: 1.2rem;
-  height: 1.2rem;
-  color: #12224b;
-}
-
-.toggle-password:hover {
-  background: rgba(229, 223, 198, 0.4);
-}
-
+/* ===== Estados de confirmação ===== */
 .sent-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #12224b; /* mesma cor da .login-right */
+  background-color: #12224b;
 }
-
 .sent-content {
   background: rgba(255,255,255,0.1);
   padding: 2rem;
@@ -227,19 +129,16 @@
   max-width: 360px;
   text-align: center;
 }
-
 .sent-title {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: #fff;
 }
-
 .info-message {
   color: #eee;
   line-height: 1.5;
   margin-bottom: 1.5rem;
 }
-
 .btn-secondary {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -250,7 +149,111 @@
   font-weight: 500;
   transition: background 0.2s;
 }
-
 .btn-secondary:hover {
   background: rgba(229, 223, 198, 0.2);
+}
+
+/* ===== Inputs ===== */
+.form-field {
+  margin-bottom: 18px;
+}
+.form-label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #e5dfc6;
+  opacity: 0.95;
+}
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 2px solid #e5dfc6;
+  background: #f5f7fb;
+  color: #092F4F;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.input::placeholder { color: #8aa0b6; }
+.input:focus {
+  border-color: #e5dfc6;
+  box-shadow: 0 0 0 3px rgba(229,223,198,.35);
+  background: #ffffff;
+}
+
+/* ===== Botão de ver senha (sem pseudo-elementos) ===== */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-wrapper input { 
+  padding-right: 56px !important; 
+}
+
+.toggle-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 44px;
+  border-radius: 10px;
+  border: 2px solid #7f8c8d;
+  background: #bdc3c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s, filter 0.2s;
+  color: #ffffff;         
+  font-size: 20px;        
+}
+.toggle-btn:hover { background: #16304a; }
+
+.toggle-btn::before { content: none !important; background: none !important; }
+
+.toggle-btn i {
+  display: block !important;
+  line-height: 1;
+  font-size: 20px !important;
+  color: inherit !important;
+}
+
+/* garantir que o svg do react-icons apareça corretamente */
+.toggle-btn > svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  pointer-events: none;
+  color: inherit;
+}
+
+/* ===== Botão principal ===== */
+.btn-primary {
+  width: 100%;
+  height: 48px;
+  border-radius: 24px;
+  border: none;
+  background: #bdc3c7;   
+  color: #092F4F;        
+  font-weight: 700;
+  letter-spacing: .3px;
+  cursor: pointer;
+  transition: transform .05s ease, filter .2s;
+}
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-primary:active { transform: translateY(1px); }
+
+/* ===== Cartão ===== */
+.form-card {
+  width: 520px;
+  max-width: 92vw;
+  background: rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.25);
+  backdrop-filter: blur(6px);
 }

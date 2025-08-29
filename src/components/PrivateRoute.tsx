@@ -8,29 +8,35 @@ interface Props {
 
 const PrivateRoute: React.FC<Props> = ({ children }) => {
   const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [allowed, setAllowed] = useState(false);
 
   useEffect(() => {
-    // Verifica sessão atual
-    supabase.auth.getSession().then(({ data }) => {
-      setAuthenticated(!!data.session);
+    let mounted = true;
+
+    async function check() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!mounted) return;
+
+      const isVerified = !!session?.user?.email_confirmed_at;
+      setAllowed(!!session && isVerified);
       setLoading(false);
+    }
+
+    check();
+
+    const { data: subscription } = supabase.auth.onAuthStateChange((_event, session) => {
+      const isVerified = !!session?.user?.email_confirmed_at;
+      setAllowed(!!session && isVerified);
     });
 
-    // Escuta mudanças de auth
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-    setAuthenticated(!!session);
-    setLoading(false);
-    });
-
-    // Cleanup
     return () => {
-    subscription.unsubscribe();
+      mounted = false;
+      subscription.subscription?.unsubscribe();
     };
   }, []);
 
-  if (loading) return <p>Carregando...</p>;
-  return authenticated ? <>{children}</> : <Navigate to="/login" replace />;
+  if (loading) return <div />; // ou um spinner
+  return allowed ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;

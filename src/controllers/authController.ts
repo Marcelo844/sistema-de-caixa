@@ -1,7 +1,7 @@
 // src/controllers/authController.ts
 import type { Request, Response } from 'express';
 import { createClient } from '@supabase/supabase-js';
-import { supabase } from '../utils/supabaseClient.js';
+import { supabase } from '../utils/supabaseClient';
 import jwt from 'jsonwebtoken';
 
 // Admin client com a service_role key (não exponha no front-end)

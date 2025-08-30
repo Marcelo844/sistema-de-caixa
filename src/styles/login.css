@@ -200,7 +200,7 @@
   height: 36px;
   width: 44px;
   border-radius: 10px;
-  border: 2px solid #7f8c8d;
+  border: 2px solid #ffffff;
   background: #bdc3c7;
   display: flex;
   align-items: center;
@@ -256,4 +256,75 @@
   padding: 28px;
   box-shadow: 0 8px 32px rgba(0,0,0,.25);
   backdrop-filter: blur(6px);
+}
+
+.error-message {
+  color: #ffaaaa;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.success {
+  color: #9be2c0;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.reset-card {
+  width: 520px;
+  max-width: 92vw;
+  margin: 0 auto;
+}
+
+.page-title {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.helper-text {
+  margin: 4px 0 12px;
+}
+.helper-text .muted {
+  color: #e5dfc6;
+  opacity: .85;
+  font-size: .92rem;
+}
+
+.reset-card .login-form {
+  background-color: rgba(28, 58, 90, 0.9);
+  padding: 1.2rem;
+  border-radius: 12px;
+  gap: .85rem;
+}
+
+.toggle-btn:hover { background: #042432; }
+.toggle-btn:active { transform: translateY(-50%) scale(0.98); }
+
+.toggle-btn i {
+  font-size: 18px;
+  line-height: 1;
+  color: inherit;
+}
+
+.forgot-text {
+  margin: -4px 0 14px;
+  font-size: 0.9rem;
+  text-align: right;
+  width: 100%;
+}
+
+.forgot-text span {
+  color: #e3dfc7;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.forgot-text span:hover {
+  color: #ffffff;
 }

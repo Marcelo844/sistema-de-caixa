@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import EntradaSaida from './pages/EntradaSaida';
 import Movimentacoes from './pages/Movimentacoes';
 import PrivateRoute from './components/PrivateRoute';
+import ResetPassword from './pages/ResetPassword';
 
 const App: React.FC = () => (
   <Router>
@@ -13,17 +14,14 @@ const App: React.FC = () => (
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route
-        path="/entrada-saida"
-        element={
+      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/entrada-saida" element={
           <PrivateRoute>
             <EntradaSaida />
           </PrivateRoute>
         }
       />
-      <Route
-        path="/movimentacoes"
-        element={
+      <Route path="/movimentacoes" element={
           <PrivateRoute>
             <Movimentacoes />
           </PrivateRoute>

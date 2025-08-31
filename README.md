@@ -30,7 +30,6 @@ Um sistema de caixa simples e funcional, desenvolvido em **Node.js + React + Sup
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
 - [Supabase](https://supabase.com/) (Banco de Dados + Autenticação)
-- [Prisma](https://www.prisma.io/) (ORM)
 
 ### Frontend
 - [React](https://react.dev/)

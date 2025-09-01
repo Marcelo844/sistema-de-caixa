@@ -1,4 +1,4 @@
-import {supabase} from '../utils/supabaseClient';
+import { supabase } from '../utils/supabaseClient';
 
 export interface Movimentacao {
   id?: string;
@@ -71,3 +71,47 @@ export async function atualizarMovimentacao(id: string, mov: Partial<Movimentaca
     throw new Error('Erro ao atualizar movimentação: ' + error.message);
   }
 }
+
+export async function buscarMovimentacoesFiltradas(filtros: {
+  tipo?: string;
+  forma_pagamento?: string;
+  dataInicio?: string;
+  dataFim?: string;
+  categoria?: string;
+}) {
+  let query = supabase.from('movimentacoes').select('*');
+
+  if (filtros.tipo && filtros.tipo !== 'todos') {
+    query = query.eq('tipo', filtros.tipo);
+  }
+
+  if (filtros.forma_pagamento) {
+    query = query.eq('forma_pagamento', filtros.forma_pagamento);
+  }
+
+  if (filtros.dataInicio) {
+    query = query.gte('data', filtros.dataInicio);
+  }
+
+  if (filtros.dataFim) {
+    query = query.lte('data', filtros.dataFim);
+  }
+
+  if (filtros.categoria) {
+    query = query.eq('categoria', filtros.categoria);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.error('Erro ao buscar movimentações filtradas:', error.message);
+    throw new Error('Erro ao buscar movimentações filtradas: ' + error.message);
+  }
+
+  return (data as Movimentacao[]).map(mov => ({
+    ...mov,
+    id: String(mov.id),
+    categoria: String(mov.categoria),
+  }));
+}
+

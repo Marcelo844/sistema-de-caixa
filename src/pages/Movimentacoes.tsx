@@ -6,6 +6,7 @@ import {
   buscarMovimentacoes,
   excluirMovimentacao,
   atualizarMovimentacao,
+  buscarMovimentacoesFiltradas,
 } from '../utils/movimentacoesService';
 import { buscarCategorias } from '../utils/categoriasService';
 import type { Movimentacao } from '../utils/movimentacoesService';
@@ -20,6 +21,36 @@ const Movimentacoes: React.FC = () => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [editandoId, setEditandoId] = useState<string | null>(null);
   const [linhaEditada, setLinhaEditada] = useState<Partial<Movimentacao>>({});
+  const [mostrarFiltros, setMostrarFiltros] = useState(false);
+
+  const [filtroTipo, setFiltroTipo] = useState('todos');
+  const [filtroPagamento, setFiltroPagamento] = useState('');
+  const [filtroDataInicio, setFiltroDataInicio] = useState('');
+  const [filtroDataFim, setFiltroDataFim] = useState('');
+  const [filtroCategoria, setFiltroCategoria] = useState('');
+  
+const limparFiltros = () => {
+  setFiltroTipo('todos');
+  setFiltroPagamento('');
+  setFiltroCategoria('');
+  setFiltroDataInicio('');
+  setFiltroDataFim('');
+  carregarMovimentacoes(); // chama sem filtros
+};
+
+const aplicarFiltros = async () => {
+  const filtros = {
+    tipo: filtroTipo !== 'todos' ? filtroTipo : undefined,
+    forma_pagamento: filtroPagamento || undefined,
+    categoria: filtroCategoria || undefined,
+    dataInicio: filtroDataInicio || undefined,
+    dataFim: filtroDataFim || undefined,
+  };
+
+  const dados = await buscarMovimentacoesFiltradas(filtros);
+  setMovimentacoes(dados);
+};
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -88,11 +119,138 @@ const Movimentacoes: React.FC = () => {
           style={{ cursor: 'pointer' }}
           onClick={() => navigate('/entrada-saida')}
         >
-          ←
+          &#8592;
         </span>
         <h2>EXTRATO DO CAIXA</h2>
-        <div className="icone-canto">🌀</div>
       </div>
+
+      <div className="filter-container">
+        <span className="filter-text">Pesquisa por filtro</span>
+        <span
+          className="filter-icon"
+          style={{ cursor: 'pointer' }}
+          onClick={() => setMostrarFiltros(!mostrarFiltros)}
+        >
+          &#9207;
+        </span>
+
+        {mostrarFiltros && (
+          <div className="painel-filtros">
+            <div className="linha-filtro">
+              <label>Tipo:</label>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="tipo"
+                    value="todos"
+                    checked={filtroTipo === 'todos'}
+                    onChange={(e) => setFiltroTipo(e.target.value)}
+                  /> Todos
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="tipo"
+                    value="entrada"
+                    checked={filtroTipo === 'entrada'}
+                    onChange={(e) => setFiltroTipo(e.target.value)}
+                  /> Entrada
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="tipo"
+                    value="saida"
+                    checked={filtroTipo === 'saida'}
+                    onChange={(e) => setFiltroTipo(e.target.value)}
+                  /> Saída
+                </label>
+              </div>
+            </div>
+
+            <div className="linha-vertical"></div>
+
+            <div className="linha-filtro">
+              <label>Forma de Pagamento:</label>
+              <div>
+                <label>
+                  <input
+                    type="radio"
+                    name="pagamento"
+                    value="pix"
+                    checked={filtroPagamento === 'pix'}
+                    onChange={(e) => setFiltroPagamento(e.target.value)}
+                  /> Pix
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="pagamento"
+                    value="cartao"
+                    checked={filtroPagamento === 'cartao'}
+                    onChange={(e) => setFiltroPagamento(e.target.value)}
+                  /> Cartão
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    name="pagamento"
+                    value="dinheiro"
+                    checked={filtroPagamento === 'dinheiro'}
+                    onChange={(e) => setFiltroPagamento(e.target.value)}
+                  /> Dinheiro
+                </label>
+              </div>
+            </div>
+
+            <div className="linha-vertical"></div>
+
+            <div className="linha-filtro">
+              <label>Período:</label>
+              <div>
+                De: <input
+                  type="date"
+                  className="periodo"
+                  value={filtroDataInicio}
+                  onChange={(e) => setFiltroDataInicio(e.target.value)}
+                />
+                Até: <input
+                  type="date"
+                  className="periodo"
+                  value={filtroDataFim}
+                  onChange={(e) => setFiltroDataFim(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="linha-vertical"></div>
+
+            <div className="linha-filtro">
+              <label>Categoria:</label>
+              <select
+                value={filtroCategoria}
+                onChange={(e) => setFiltroCategoria(e.target.value)}
+              >
+                <option value="">Selecione</option>
+                {categorias.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.nome}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="linha-vertical"></div>
+
+            <div className="acoes-filtro">
+              <button className="limpar" onClick={limparFiltros}>Limpar filtros</button>
+              <button className="aplicar" onClick={aplicarFiltros}><b>Aplicar Filtro</b></button>
+            </div>
+          </div>
+        )}
+      </div>
+
 
       <div className="tabela-wrapper">
         <table className="tabela-extrato">

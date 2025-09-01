@@ -7,14 +7,18 @@
 .extrato-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  position: relative;
   border-bottom: 1px solid #000;
   padding-bottom: 10px;
 }
 
 .extrato-header .voltar {
-  font-size: 24px;
+  font-size: 50px;
   cursor: pointer;
+  position: absolute;
+  left: 0;
+  
 }
 
 .extrato-header h2 {
@@ -22,20 +26,82 @@
   font-weight: bold;
 }
 
-.icone-canto {
+.painel-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  justify-content: center;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.linha-filtro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.linha-filtro > div {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.linha-filtro label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.linha-vertical {
+  width: 2px;
+  height: 40px;
+  background-color: #ccc;
+  margin: 0 8px;
+  align-self: center;
+}
+
+input.periodo {
+  width: 120px;
+  padding: 4px 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin-right: 10px;
+}
+
+select {
+  width: 200px;
+  height: 40px;
+}
+
+.acoes-filtro {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.acoes-filtro button {
+  padding: 15px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.acoes-filtro .limpar {
+  background-color: #ccc;
+}
+
+.acoes-filtro .aplicar {
   background-color: #0d2b45;
   color: white;
-  padding: 10px;
-  border-radius: 10px;
 }
 
-.filtros {
-  margin: 10px 0;
-  font-size: 14px;
-  color: #333;
-}
 
 .tabela-wrapper {
+  margin-top: 10px;
   background-color: #fff;
   border-radius: 10px;
   overflow-x: auto;

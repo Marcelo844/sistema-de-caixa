@@ -7,6 +7,7 @@ import EntradaSaida from './pages/EntradaSaida';
 import Movimentacoes from './pages/Movimentacoes';
 import PrivateRoute from './components/PrivateRoute';
 import ResetPassword from './pages/ResetPassword';
+import Relatorios from './pages/relatorios';
 
 const App: React.FC = () => (
   <Router>
@@ -27,6 +28,11 @@ const App: React.FC = () => (
           </PrivateRoute>
         }
       />
+    <Route path="/relatorios" element={
+      <PrivateRoute>
+        <Relatorios />
+      </PrivateRoute>
+    } />
     </Routes>
   </Router>
 );

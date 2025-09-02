@@ -191,3 +191,20 @@ select {
 .tabela-extrato tr.editando td {
   background-color: #f0f8ff;
 }
+.btn-relatorios {
+  position: absolute;
+  right: 0;
+  background-color: #0d2b45;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-relatorios:hover {
+  background-color: #1a4b7a;
+}

@@ -1,0 +1,91 @@
+.relatorios-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.relatorios-header {
+  background-color: #0b2e4e;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.totais-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+  width: 45%;
+  text-align: center;
+}
+
+.total-entradas h2 {
+  color: #28a745;
+}
+
+.total-saidas h2 {
+  color: #dc3545;
+}
+
+.grafico-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+.grafico-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+select {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.btn-voltar {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-right: 15px;
+}
+
+.btn-voltar:hover {
+  background-color: white;
+  color: #0b2e4e;
+}
+
+.relatorios-header {
+  background-color: #0b2e4e;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  color: white;
+  display: flex;             /* << para alinhar lado a lado */
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.relatorios-header h1 {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+}

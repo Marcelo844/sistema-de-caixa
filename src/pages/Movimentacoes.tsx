@@ -113,16 +113,25 @@ const aplicarFiltros = async () => {
 
   return (
     <div className="extrato-container">
-      <div className="extrato-header">
-        <span
-          className="voltar"
-          style={{ cursor: 'pointer' }}
-          onClick={() => navigate('/entrada-saida')}
-        >
-          &#8592;
-        </span>
-        <h2>EXTRATO DO CAIXA</h2>
-      </div>
+     <div className="extrato-header">
+  <span
+    className="voltar"
+    style={{ cursor: 'pointer' }}
+    onClick={() => navigate('/entrada-saida')}
+  >
+    &#8592;
+  </span>
+  <h2>EXTRATO DO CAIXA</h2>
+
+  {/* Botão para acessar Relatórios */}
+  <button
+    className="btn-relatorios"
+    onClick={() => navigate('/relatorios')}
+  >
+    📊 Relatórios
+  </button>
+</div>
+
 
       <div className="filter-container">
         <span className="filter-text">Pesquisa por filtro</span>
